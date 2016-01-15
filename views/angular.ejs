@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html ng-app="taskerApp">
+<html ng-app="tasker">
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script type="text/javascript"
     <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
     <script type="text/javascript" src="/javascripts/angular.min.js"></script>
     <script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
-    <script type='text/javascript' src="/javascripts/angular-app.js"></script>
+    <script type="text/javascript" src="/javascripts/angular-app.js"></script>
   </head>
   <body>
 
@@ -22,8 +20,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">    <span class="glyphicon glyphicon-list-alt"></span>
- <%= title %></a>
+      <a class="navbar-brand" href="#"><%= title %></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -37,38 +34,40 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-<section class="container">
+    <section class="container">
 
-<article class="row">
-  <div class="col-md-12">
-    <h2>My Tasks</h2>
-  </div>
-</article>
+      <article class="row" ng-controller="LoadingPanelCtrl">
+        <div class="col-md-12">
+          <h1>Logging You in...</h1>
+          <p id="loading-message">
+            Please wait, we're just authentication and validating that you have an invitation.
+          </p>
+          <button type="button" id="login-btn">Log In!</button>
+        </div>
+      </article>
 
-<!-- angular TaskListCtrl -->
-<article ng-controller="TaskListCtrl">
-  <div class="col-md-4">
-  <h1>Create Task</h1>
-    <form ng-submit="createTask(name, description)">
-    <input class='form-control' type="text" ng-model="name" name="name" />
-    <input class='form-control' type="text" ng-model="description" name="description" />
-    <input class='btn btn-primary' type="submit" id="submit" value="Submit" />
-    </form>
-  </div>
+        <article class="row" ng-controller="TaskListCtrl">
+        <div class="col-md-12">
 
-  <div class="col-md-8">
-  <ul>
-    <li ng-repeat="task in tasks">
-      <h4><span class="glyphicon glyphicon-chevron-right"> {{task.name}}</span></h4>
-      <p><strong>Description</strong> <em>{{task.description}}</em></p>
-      <p><strong>Done?</strong> <span data-task="{{task._id}}"class="glyphicon glyphicon-ok" ng-click="completeTask(task)"></span></p>
-    </li>
-  </ul>
-  </div>
-</article>
+          <form ng-submit="createTask(name, description)">
+            <input class="form-control" type="text" name="name" ng-model="name">
+            <input class="form-control" type="text" name="description" ng-model="description">
+            <input type="submit" value="Add Task" class="btn btn-primary">
+          </form>
 
-<!-- end angular TaskListCtrl -->
-</section>
+          <ul>
+            <li ng-repeat="task in tasks">
+              <span ng-click="completeTask(task)" data-task="{{task._id}}" class='glyphicon glyphicon-chevron-right'>
+              <strong>{{task.name}}</strong></span><br>
+              <em>{{task.description}}</em>
+            </li>
+          </ul>
+
+        </div>
+      </article>
+
+
+    </section>
 
 
   </body>

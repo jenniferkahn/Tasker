@@ -6,7 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "angular": "^1.4.0",
+    "angular": "^1.4.8",
     "backbone": "^1.2.0",
     "body-parser": "~1.12.4",
     "bootstrap": "^3.3.4",
