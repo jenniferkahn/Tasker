@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="tasker">
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
     <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
-    <script type="text/javascript" src="/javascripts/underscore-min.js"></script>
-    <script type="text/javascript" src="/javascripts/backbone-min.js"></script>
+    <script type="text/javascript" src="/javascripts/angular.min.js"></script>
     <script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/javascripts/backbone-app.js"></script>
+    <script type="text/javascript" src="/javascripts/angular-app.js"></script>
   </head>
   <body>
 
@@ -37,29 +36,37 @@
 
     <section class="container">
 
-      <article class="row">
+      <article class="row" ng-controller="LoadingPanelCtrl">
         <div class="col-md-12">
-          <h1><%= title %></h1>
-          <h4>Using <%= library %></h4>
-          <p><em>Not yet implemented!</em></p>
+          <h1>Logging You in...</h1>
+          <p id="loading-message">
+            Please wait, we're just authentication and validating that you have an invitation.
+          </p>
+          <button type="button" id="login-btn">Log In!</button>
         </div>
       </article>
 
-      <article class="row">
-      <div class="col-md-12">
+        <article class="row" ng-controller="TaskListCtrl">
+        <div class="col-md-12">
 
-        <form>
-          <input class="form-control" type="text" name="name">
-          <input class="form-control" type="text" name="description">
-          <input type="submit" value="Add Task" class="btn btn-primary">
-        </form>
+          <form ng-submit="createTask(name, description)">
+            <input class="form-control" type="text" name="name" ng-model="name">
+            <input class="form-control" type="text" name="description" ng-model="description">
+            <input type="submit" value="Add Task" class="btn btn-primary">
+          </form>
 
-        <ul id="collection-container">
+          <ul>
+            <li ng-repeat="task in tasks">
+              <span ng-click="completeTask(task)" data-task="{{task._id}}" class='glyphicon glyphicon-chevron-right'>
+              <strong>{{task.name}}</strong></span><br>
+              <em>{{task.description}}</em>
 
-        </ul>
+            </li>
+          </ul>
 
-      </div>
-    </article>
+        </div>
+      </article>
+
 
     </section>
 
